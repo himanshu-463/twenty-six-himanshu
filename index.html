@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Celebration</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Segoe UI',sans-serif;
+    }
+
+    body{
+      height:100vh;
+      width:100vw;
+      background:linear-gradient(135deg,#ffdee9,#b5fffc);
+      overflow:hidden;
+    }
+
+    .message{
+      position:absolute;
+      top:40px;
+      width:100%;
+      text-align:center;
+      font-size:2rem;
+      font-weight:600;
+      color:#333;
+      z-index:3;
+      animation:fadeIn 2s ease;
+    }
+
+    .sub{
+      font-size:1.1rem;
+      margin-top:10px;
+      color:#555;
+    }
+
+    .hint{
+      position:absolute;
+      top:130px;
+      width:100%;
+      text-align:center;
+      font-size:1rem;
+      font-weight:500;
+      z-index:3;
+      color:#222;
+    }
+
+    /* DOOR CONTAINER */
+    .doors{
+      position:absolute;
+      bottom:0;
+      width:100%;
+      height:75%;
+      display:flex;
+      justify-content: center;
+      cursor:pointer;
+      z-index:2;
+    }
+
+    .door{
+      border-radius: 2%;
+      width:20%;
+      height:70%;
+      background:linear-gradient(180deg,#8b4513,#5a2d0c);
+      position:relative;
+      transition:transform 1.2s ease-in-out;
+      box-shadow:inset 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    .door.left{
+      border-right:2px solid rgba(0,0,0,0.3);
+    }
+
+    .door.right{
+      border-left:2px solid rgba(0,0,0,0.3);
+    }
+
+    /* Door knobs */
+    .door::before{
+      content:'';
+      position:absolute;
+      top:50%;
+      width:22px;
+      height:22px;
+      background:gold;
+      border-radius:50%;
+      transform:translateY(-50%);
+    }
+
+    .door.left::before{ right:20px; }
+    .door.right::before{ left:20px; }
+
+    /* Text on doors */
+    .door-text{
+      position:absolute;
+      top:90%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      color:#fff;
+      font-size:1.4rem;
+      font-weight:700;
+      padding:14px 26px;
+      border:2px dashed rgba(255,255,255,0.9);
+      border-radius:10px;
+      background:rgba(0,0,0,0.3);
+      text-shadow:0 0 12px gold;
+      animation:glow 1.5s infinite alternate;
+      pointer-events:none;
+    }
+
+    /* OPEN ANIMATION */
+    .open .left{
+      transform:translateX(-100%);
+    }
+
+    .open .right{
+      transform:translateX(100%);
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(20px);} 
+      to{opacity:1; transform:translateY(0);} 
+    }
+
+    @keyframes glow{
+      from{box-shadow:0 0 6px gold;} 
+      to{box-shadow:0 0 18px gold;} 
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="message">
+    🎉 Finally the day has come! 🎉<br>
+    Let’s celebrate together 🎂
+  </div>
+
+  <div class="doors" id="doors" onclick="openDoors()">
+    <div class="door left"></div>
+    <div class="door right"></div>
+  </div>
+
+    <div class="door-text">CLICK TO OPEN</div>
+
+  <script>
+    function openDoors(){
+      const doors = document.getElementById('doors');
+      doors.classList.add('open');
+
+      // Redirect after animation
+      setTimeout(() => {
+        window.location.href = 'countdown.html';
+      }, 1300);
+    }
+  </script>
+
+</body>
+</html>

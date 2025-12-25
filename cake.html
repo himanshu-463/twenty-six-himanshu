@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Cake 🎂</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  background:#0c0c0c;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:white;
+}
+
+/* 💫 PARTICLES */
+.particles{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+.particle{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 15px white;
+  animation:floatParticle linear infinite;
+}
+@keyframes floatParticle{
+  from{transform:translateY(100vh);opacity:0}
+  30%{opacity:1}
+  to{transform:translateY(-20vh);opacity:0}
+}
+
+/* ✨ FAIRY LIGHTS */
+.fairy{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-evenly;
+  padding:12px 0;
+}
+.fairy span{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  animation:twinkle 2s infinite alternate;
+  box-shadow:0 0 18px currentColor;
+}
+.fairy span:nth-child(odd){animation-delay:1s}
+@keyframes twinkle{
+  from{opacity:.3}
+  to{opacity:1}
+}
+.red{background:#ff4d4d;color:#ff4d4d}
+.yellow{background:#ffd633;color:#ffd633}
+.blue{background:#4da6ff;color:#4da6ff}
+.green{background:#4dff88;color:#4dff88}
+.pink{background:#ff66cc;color:#ff66cc}
+
+/* 🎈 BALLOONS */
+.balloon{
+  position:absolute;
+  bottom:-150px;
+  width:50px;
+  height:65px;
+  border-radius:50%;
+  animation:fly 12s linear infinite;
+}
+.balloon::after{
+  content:"";
+  position:absolute;
+  bottom:-20px;
+  left:50%;
+  width:2px;
+  height:25px;
+  background:#aaa;
+}
+@keyframes fly{
+  to{transform:translateY(-120vh)}
+}
+
+/* 🎂 CAKE */
+.cake{
+  position:relative;
+  margin-top:70px;
+}
+.cake-base{
+  width:180px;
+  height:135px;
+  position:relative;
+}
+.layer{
+  width:180px;
+  height:45px;
+  border-radius:10px;
+  position:absolute;
+}
+.bottom{background:#f7c59f;bottom:0}
+.mid{background:#f2b179;bottom:45px}
+.top{background:#fdd9b5;bottom:90px}
+
+/* 🕯️ CANDLE */
+.candle{
+  width:8px;
+  height:30px;
+  background:white;
+  position:absolute;
+  top:-30px;
+  left:50%;
+  transform:translateX(-50%);
+}
+.flame{
+  width:14px;
+  height:14px;
+  background:gold;
+  border-radius:50%;
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  box-shadow:0 0 30px gold;
+  animation:blowLoop 3s infinite;
+}
+@keyframes blowLoop{
+  0%{opacity:1;transform:translateX(-50%) scale(1)}
+  70%{opacity:.3;transform:translateX(-50%) scale(.4)}
+  100%{opacity:0}
+}
+
+/* 💬 FLOATING TEXT */
+.floating-text{
+  position:absolute;
+  bottom:120px;
+  font-size:1.5rem;
+  animation:floatUp 6s infinite;
+}
+@keyframes floatUp{
+  0%{opacity:0}
+  30%{opacity:1}
+  100%{transform:translateY(-80px);opacity:0}
+}
+
+/* 🎁 GIFT BOX */
+.gift-link{
+  position:absolute;
+  bottom:50px;
+  text-decoration:none;
+}
+.gift{
+  width:60px;
+  height:50px;
+  background:#ff4d4d;
+  border-radius:6px;
+  position:relative;
+  animation:bounce 1.5s infinite;
+  box-shadow:0 0 20px #ff4d4d;
+}
+.gift::before{
+  content:"";
+  position:absolute;
+  width:10px;
+  height:50px;
+  background:#ffd633;
+  left:50%;
+  transform:translateX(-50%);
+}
+.gift::after{
+  content:"";
+  position:absolute;
+  width:60px;
+  height:10px;
+  background:#ffd633;
+  top:20px;
+}
+.ribbon{
+  position:absolute;
+  width:16px;
+  height:16px;
+  background:#ffd633;
+  border-radius:50%;
+  top:-8px;
+  left:50%;
+  transform:translateX(-50%);
+}
+@keyframes bounce{
+  50%{transform:translateY(-8px)}
+}
+.gift-text{
+  text-align:center;
+  font-size:.8rem;
+  margin-top:6px;
+  color:#ffd633;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✨ LIGHTS -->
+<div class="fairy">
+  <span class="red"></span>
+  <span class="yellow"></span>
+  <span class="blue"></span>
+  <span class="green"></span>
+  <span class="pink"></span>
+</div>
+
+<!-- 💫 PARTICLES -->
+<div class="particles" id="particles"></div>
+
+<!-- 🎈 BALLOONS -->
+<div class="balloon" style="left:15%;background:#ff4d4d"></div>
+<div class="balloon" style="left:40%;background:#4da6ff;animation-delay:2s"></div>
+<div class="balloon" style="left:65%;background:#ffd633;animation-delay:4s"></div>
+
+<!-- 🎂 CAKE -->
+<div class="cake">
+  <div class="cake-base">
+    <div class="layer top"></div>
+    <div class="layer mid"></div>
+    <div class="layer bottom"></div>
+  </div>
+  <div class="candle"><div class="flame"></div></div>
+</div>
+
+<!-- 💬 TEXT -->
+<div class="floating-text" id="floatingText"></div>
+
+<!-- 🎁 GIFT (LINK TO NEW HTML) -->
+<a href="gift.html" class="gift-link">
+  <div class="gift">
+    <div class="ribbon"></div>
+  </div>
+  <div class="gift-text">Open Gift 🎁</div>
+</a>
+
+<script>
+document.getElementById("floatingText").innerText =
+"Happy Birthday myyy Kashishhh 💖";
+
+const container=document.getElementById("particles");
+for(let i=0;i<35;i++){
+  const p=document.createElement("div");
+  p.className="particle";
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=5+Math.random()*5+"s";
+  p.style.animationDelay=Math.random()*5+"s";
+  container.appendChild(p);
+}
+</script>
+
+</body>
+</html>

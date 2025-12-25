@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Your Gift 💖</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at top,#ff66cc,#1a001a);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  overflow:hidden;
+}
+
+.container{
+  width:90%;
+  max-width:1000px;
+  text-align:center;
+}
+
+h1{
+  margin-bottom:10px;
+  font-size:2.2rem;
+}
+p{
+  margin-bottom:25px;
+  font-size:1.1rem;
+  opacity:.9;
+}
+
+/* 🖼️ GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:140px;
+  gap:14px;
+}
+
+.big{
+  grid-column:2 / span 2;
+  grid-row:1 / span 2;
+}
+
+.gallery img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.4);
+  transition:.4s;
+  cursor:pointer;
+}
+.gallery img:hover{
+  transform:scale(1.05);
+  box-shadow:0 15px 35px rgba(255,102,204,.6);
+}
+
+.tall{grid-row:span 2}
+.wide{grid-column:span 2}
+
+/* 💖 FLOATING HEARTS */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  color:#ff66cc;
+  animation:rise linear infinite;
+  opacity:.7;
+}
+@keyframes rise{
+  from{transform:translateY(0);opacity:0}
+  20%{opacity:1}
+  to{transform:translateY(-120vh);opacity:0}
+}
+
+/* 🔍 FULLSCREEN VIEWER */
+.viewer{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.viewer img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:20px;
+  box-shadow:0 0 40px rgba(255,102,204,.7);
+  animation:zoom .3s ease;
+}
+
+@keyframes zoom{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:2rem;
+  cursor:pointer;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Some memories just for you ✨</h1>
+
+  <!-- 🖼️ PHOTO GALLERY -->
+  <div class="gallery">
+    <!-- BIG IMAGE -->
+    <img src="WhatsApp Image 2025-12-25 at 1.34.01 PM (1).jpeg" class="big" alt="Main Memory">
+
+    <!-- SMALL RANDOM -->
+    <img src="1st.jpg" class="tall">
+    <img src="6th.jpeg">
+    <img src="5th.jpeg" class="wide">
+    <img src="4th.jpeg">
+    <img src="2nd.jpeg" class="tall">
+    <img src="3rd.jpeg">
+    <img src="WhatsApp Image 2025-12-25 at 1.34.01 PM.jpeg" class="">
+  </div>
+</div>
+
+<!-- 🔍 FULLSCREEN IMAGE VIEW -->
+<div class="viewer" id="viewer">
+  <span class="close" id="close">&times;</span>
+  <img id="viewerImg">
+</div>
+
+<script>
+/* 💖 HEARTS */
+for(let i=0;i<25;i++){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"%";
+  h.style.animationDuration=6+Math.random()*6+"s";
+  h.style.fontSize=14+Math.random()*18+"px";
+  document.body.appendChild(h);
+}
+
+/* 🔍 FULLSCREEN LOGIC */
+const viewer=document.getElementById("viewer");
+const viewerImg=document.getElementById("viewerImg");
+
+document.querySelectorAll(".gallery img").forEach(img=>{
+  img.onclick=()=>{
+    viewer.style.display="flex";
+    viewerImg.src=img.src;
+  };
+});
+
+document.getElementById("close").onclick=closeViewer;
+viewer.onclick=e=>{
+  if(e.target===viewer) closeViewer();
+};
+
+function closeViewer(){
+  viewer.style.display="none";
+  viewerImg.src="";
+}
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape") closeViewer();
+});
+</script>
+
+</body>
+</html>
